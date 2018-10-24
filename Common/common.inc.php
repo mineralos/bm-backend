@@ -88,9 +88,9 @@ function getLoggedUser() {
                 if (file_exists($config["usersFile"])) {
                     $configContent=@file_get_contents($config["usersFile"]);
                 } else {
-                    if ($username == $config["userAdmin"] && $_SERVER['PHP_AUTH_PW'] == $config["passwordAdmin"]) {
+                    if ($username == $config["userAdmin"]) {
                         return $config["userAdmin"];
-                    } elseif ($username == $config["userGuest"] && $_SERVER['PHP_AUTH_PW'] == $config["passwordGuest"]) {
+                    } elseif ($username == $config["userGuest"]) {
                         return $config["userGuest"];
                     } else {
                         return null;
@@ -103,6 +103,10 @@ function getLoggedUser() {
                 foreach ($users as $user) {
                     if ($username == $user["username"]) {
                         if (generatePasswordHash($_SERVER['PHP_AUTH_PW'])==$user["password"]) {
+                            return $user["username"];
+                        } elseif ($username == $config["userAdmin"] && generatePasswordHash($config["passwordAdmin"])==$user["password"]) {
+                            return $user["username"];
+                        } elseif ($username == $config["userGuest"] && generatePasswordHash($config["passwordGuest"])==$user["password"]) {
                             return $user["username"];
                         } else {
                             return null;
