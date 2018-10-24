@@ -18,26 +18,17 @@ class StatusController {
         $response=$service->call("pools+devs+stats");
         $devs=@$response["devs"][0]["DEVS"];
         //look for the fans speed
-        $fansSpeed=0;
+        $fansSpeed=array();
         $isTuning=false;
 
         for ($i=0;$i<8;$i++) {
             if (isset($response["stats"][0]["STATS"])&&array_key_exists($i,$response["stats"][0]["STATS"])) {
                 $stats = $response["stats"][0]["STATS"][$i];
-                if (isset($stats["Fan duty"])&&$fansSpeed==0&&intval($stats["Fan duty"]) > 0) {
-                    $fansSpeed = intval($stats["Fan duty"]);
+                for ($j=1;$j<9;$j++) {
+                    if (isset($stats["fan".$j])&&intval($stats["fan".$j]) > 0) {
+                        $fansSpeed[$j] = intval($stats["fan".$j]);
+                    }
                 }
-
-                // is tuning
-                if (
-                    ((isset($stats["VidOptimal"])&&$stats["VidOptimal"]===false)||
-                        (isset($stats["pllOptimal"])&&$stats["pllOptimal"]===false))
-                        &&isAutoTuneEnabled()) {
-                    $isTuning=true;
-                }
-
-
-
             }
         }
 
