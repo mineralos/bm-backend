@@ -1,0 +1,5 @@
+.idea
+.DS_Store
+phpunit.phar
+phpunit.phar.asc
+composer.phar
