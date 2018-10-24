@@ -9,7 +9,7 @@ $config["usersFile"]="/config/web-users.json";
 $config["buildFile"]="/etc/os-release";
 $config["jwtKeyFile"]="/tmp/jwtK";
 $config["jwtTokenExpire"]=21600; //6 hours
-$config["serverName"]="DragonMint";
+$config["serverName"]="AntMiner";
 $config["salt"]="8985dee0f2bc1b7a895d58bc4811e373";
 
 $config["interfacesDirectory"]="/config/network/";
@@ -20,8 +20,8 @@ $config["logsDumpedFile"]="/tmp/miner.log";
 //Default Passwords in Case Missing or Corrupted Users File
 $config["userAdmin"]="admin";
 $config["userGuest"]="guest";
-$config["passwordAdmin"]="dragonadmin";
-$config["passwordGuest"]="dragonguest";
+$config["passwordAdmin"]="admin";
+$config["passwordGuest"]="guest";
 
 //Versions
 $config["hardwareVersionFile"]="/etc/hwrevision";
